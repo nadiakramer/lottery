@@ -1,31 +1,18 @@
 pragma solidity ^0.4.0;
 
-contract LotteryFactory {
-
-    uint coolDown = 2 minutes;
-    uint startingTime;
-    uint amountOfBets;
-    uint pot;
-
-    mapping(address => uint) playersRange;
-    mapping(uint => address) public playerToOwner;
-
+contract Player {
     struct Player {
         string name;
-        uint   money;
+        uint index;
         uint stake;
     }
 
-    Player[] players;
+    mapping(address => Player) players;
 
-
-    function _createPlayer(string _name, uint _money) internal {
-        uint  id = players.push(Player(_name, _money)) -1;
-        emit NewPlayer(id, _name, _money, 0);
+    function _createPlayer(address player) internal {
+        players[msg.sender].name = _playerName;
+        players[msg.sender].stake = _stake;
+        players[msg.sender].index = addressIndexes.push(msg.sender) - 1;
     }
 
-
-    function LotteryFactory(){
-
-    }
 }
