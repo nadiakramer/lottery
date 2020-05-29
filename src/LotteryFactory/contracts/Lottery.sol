@@ -43,6 +43,7 @@ contract Lottery{
         coolDown = _coolDown;
     }
 
+//
     function () external payable {
         participate("Unknown", 0);
     }
@@ -61,10 +62,10 @@ contract Lottery{
 
 
     function startLottery(uint _minEth) public {
-        //TODO: lottery is live if min 2 players participate
-        isLotteryLive = true;
-        minEthToParticipate = _minEth == 0 ? (uint)(0.01): _minEth;
-    }
+    //TODO: lottery is live if min 2 players participate
+    isLotteryLive = true;
+    minEthToParticipate = _minEth == 0 ? 1 : _minEth;
+}
 
     //wait for the startingTime and call the method
     function selectWinner() public {
@@ -94,9 +95,9 @@ contract Lottery{
 //        return uint8(result);
 //    }
 
-//    function _triggerCoolDown() internal {
-//        startingTime = now + coolDown;
-//    }
+    function _triggerCoolDown() internal {
+        startingTime = now + coolDown;
+    }
 
     function generateRandomNumber(string memory _str) private returns (uint){
         return uint(keccak256(abi.encodePacked(_str)));
