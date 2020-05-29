@@ -1,8 +1,8 @@
-pragma solidity ^0.4.0;
+pragma solidity >=0.4.21 <0.7.0;
 
 import "./Lottery.sol";
 
-contract LotteryFactory is Lottery{
+contract LotteryFactory is Lottery {
     address[] public lotteries;
 
     struct lottery{
@@ -12,15 +12,15 @@ contract LotteryFactory is Lottery{
 
     mapping(address => lottery) lotteryStructs;
 
-    function createLottery(string _name, uint _coolDown) public {
-        address newLottery = new Lottery(_name, _coolDown,  msg.sender);
+    function createLottery(string memory _name, uint _coolDown) public {
+        address newLottery = (address) (new Lottery(_name, _coolDown,  msg.sender));
         lotteryStructs[newLottery].index = lotteries.push(newLottery) - 1;
         lotteryStructs[newLottery].manager = msg.sender;
 
-        OpenLottery(newLottery);
+        emit OpenLottery(newLottery);
     }
 
-    function getLotteries() public view returns(address[]){
+    function getLotteries() public view returns(address[] memory){
         return lotteries;
     }
 
