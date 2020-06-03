@@ -1,3 +1,3 @@
 export default {
-    lotteryFactoryAddress: "0xb4cdD05B2399F65817ef620e342b73718d1570A8"
+    lotteryFactoryAddress: "0x131883B2e02A7E60616086d94160Dd162fd4de42"
 }
